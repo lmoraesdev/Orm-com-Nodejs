@@ -38,9 +38,21 @@ class PessoasController {
 		try {
 			await database.Pessoas.update(novasInfos, { where: { id: Number(id) } });
 			const pessoasAtualizada = await database.Pessoas.findOne({
-				where: { id: Number(id) }
-			})
-			return res.status(200).json(pessoasAtualizada)
+				where: { id: Number(id) },
+			});
+			return res.status(200).json(pessoasAtualizada);
+		} catch {
+			return res.status(500).json(error.message);
+		}
+	}
+
+	static async apagaPessoa(req, res) {
+		const { id } = req.params;
+		try {
+			await database.Pessoas.destroy({
+				where: { id: Number(id) },
+			});
+			return res.status(200).json({message: `id ${id} deletado`});
 		} catch {
 			return res.status(500).json(error.message);
 		}
