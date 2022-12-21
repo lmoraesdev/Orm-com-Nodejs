@@ -1,26 +1,14 @@
 "use strict";
-const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-	class Pessoas extends Model {
-		static associate(models) {
-			Pessoas.hasMany(models.Turmas, {
-				foreignKey: "docente_id",
-			});
-			Pessoas.hasMany(models.Matriculas, {
-				foreignKey: "estudante_id",
-				scope: { status: "confirmando" },
-				as: "aulasMatriculadas"
-			});
-		}
-	}
-	Pessoas.init(
+	const Pessoas = sequelize.define(
+		"Pessoas",
 		{
 			name: {
 				type: DataTypes.STRING,
 				validate: {
-					funcaovalidadora: function (dado) {
+					funcaoValidadora: function (dado) {
 						if (dado.length < 3)
-							throw new Error("O campo nome deve ter mais de 3 caracteres");
+							throw new Error("o campo nome deve ter mais de 3 caracteres");
 					},
 				},
 			},
@@ -30,14 +18,13 @@ module.exports = (sequelize, DataTypes) => {
 				validate: {
 					isEmail: {
 						args: true,
-						msg: "dado do tipo e-mail invalidos",
+						msg: "dado do tipo e-mail inválido",
 					},
 				},
 			},
 			role: DataTypes.STRING,
 		},
 		{
-			sequelize,
 			paranoid: true,
 			defaultScope: {
 				where: { ativo: true },
@@ -45,8 +32,17 @@ module.exports = (sequelize, DataTypes) => {
 			scopes: {
 				todos: { where: {} },
 			},
-			modelName: "Pessoas",
 		}
 	);
+	Pessoas.associate = function (models) {
+		Pessoas.hasMany(models.Turmas, {
+			foreignKey: "docente_id",
+		});
+		Pessoas.hasMany(models.Matriculas, {
+			foreignKey: "estudante_id",
+			scope: { status: "confirmado" },
+			as: "aulasMatriculadas",
+		});
+	};
 	return Pessoas;
 };

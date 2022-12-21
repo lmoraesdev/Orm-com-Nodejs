@@ -7,6 +7,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.rawSelect("Pessoas", "deleteAt");
+		await queryInterface.removeColumn("Pessoas", "deleteAt");
 	},
 };
