@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 	const Pessoas = sequelize.define(
 		"Pessoas",
 		{
-			name: {
+			nome: {
 				type: DataTypes.STRING,
 				validate: {
 					funcaoValidadora: function (dado) {
@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			scopes: {
 				todos: { where: {} },
+				//etc: { constraint: valor }
 			},
 		}
 	);

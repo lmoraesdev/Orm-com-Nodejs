@@ -1,13 +1,10 @@
-"use strict";
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-	async up(queryInterface, Sequelize) {
-		await queryInterface.bulkInsert(
+	up: (queryInterface) => {
+		return queryInterface.bulkInsert(
 			"Pessoas",
 			[
 				{
-					name: "Ana Souza",
+					nome: "Ana Souza",
 					ativo: true,
 					email: "ana@ana.com",
 					role: "estudante",
@@ -15,7 +12,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
-					name: "Marcos Cintra",
+					nome: "Marcos Cintra",
 					ativo: true,
 					email: "marcos@marcos.com",
 					role: "estudante",
@@ -23,7 +20,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
-					name: "Felipe Cardoso",
+					nome: "Felipe Cardoso",
 					ativo: true,
 					email: "felipe@felipe.com",
 					role: "estudante",
@@ -31,7 +28,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
-					name: "Sandra Gomes",
+					nome: "Sandra Gomes",
 					ativo: false,
 					email: "sandra@sandra.com",
 					role: "estudante",
@@ -39,7 +36,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
-					name: "Paula Morais",
+					nome: "Paula Morais",
 					ativo: true,
 					email: "paula@paula.com",
 					role: "docente",
@@ -47,7 +44,7 @@ module.exports = {
 					updatedAt: new Date(),
 				},
 				{
-					name: "Sergio Lopes",
+					nome: "Sergio Lopes",
 					ativo: true,
 					email: "sergio@sergio.com",
 					role: "docente",
@@ -59,11 +56,7 @@ module.exports = {
 		);
 	},
 
-	async down(queryInterface, Sequelize) {
-		await queryInterface.bulkDelete(
-			"Pessoas",
-			null,
-			{}
-		);
+	down: (queryInterface) => {
+		return queryInterface.bulkDelete("Pessoas", null, {});
 	},
 };

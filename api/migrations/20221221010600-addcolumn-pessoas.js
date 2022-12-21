@@ -1,12 +1,12 @@
 "use strict";
 module.exports = {
-	async up(queryInterface, Sequelize) {
-		await queryInterface.addColumn("Pessoas", "deleteAt", {
+	up: (queryInterface, Sequelize) => {
+		return queryInterface.addColumn("Pessoas", "deletedAt", {
 			allowNull: true,
 			type: Sequelize.DATE,
 		});
 	},
-	async down(queryInterface, Sequelize) {
-		await queryInterface.removeColumn("Pessoas", "deleteAt");
+	down: (queryInterface) => {
+		return queryInterface.removeColumn("Pessoas", "deletedAt");
 	},
 };
