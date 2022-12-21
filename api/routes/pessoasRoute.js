@@ -6,16 +6,17 @@ router
 	.get("/pessoas", PessoasController.pegaTodasAsPessoas)
 	.get("/pessoas/:id", PessoasController.pegaUmPessoa)
 	.post("/pessoas", PessoasController.criaPessoa)
+	.post("/pessoas/:id/restaura", PessoasController.restauraPessoa)
 	.put("/pessoas/:id", PessoasController.atualizaPessoa)
 	.delete("/pessoas/:id", PessoasController.apagaPessoa)
+
 	.get(
 		"/pessoas/:estudanteId/matricula/:matriculaId",
 		PessoasController.pegaUmaMatricula
 	)
 	.post("/pessoas/:estudanteId/matricula", PessoasController.criaMatricula)
-	.post("/pessoas/:id/matricula", PessoasController.restauraPessoa)
 	.post(
-		"/pessoas/:estudanteId/matricula/:matriculaId",
+		"/pessoas/:estudanteId/matricula/:matriculaId/restaura",
 		PessoasController.restauraMatricula
 	)
 	.put(
