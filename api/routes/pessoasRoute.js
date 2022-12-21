@@ -3,13 +3,15 @@ const PessoasController = require("../controllers/PessoaController");
 
 const router = Router();
 router
-	.get("/pessoas", PessoasController.pegaTodasAsPessoas)
+	.get("/pessoas", PessoasController.pegaPessoasAtivas)
+	.get("/pessoas/todos", PessoasController.pegaTodasAsPessoas)
 	.get("/pessoas/:id", PessoasController.pegaUmPessoa)
 	.post("/pessoas", PessoasController.criaPessoa)
 	.post("/pessoas/:id/restaura", PessoasController.restauraPessoa)
 	.put("/pessoas/:id", PessoasController.atualizaPessoa)
 	.delete("/pessoas/:id", PessoasController.apagaPessoa)
 
+	//matriculas
 	.get(
 		"/pessoas/:estudanteId/matricula/:matriculaId",
 		PessoasController.pegaUmaMatricula
