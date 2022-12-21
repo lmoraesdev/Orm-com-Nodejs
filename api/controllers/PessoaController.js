@@ -1,13 +1,14 @@
 const { NUMBER } = require("sequelize");
 const database = require("../models");
+const pessoas = require("../models/pessoas");
 
 class PessoasController {
-	static async pegaPessoasAtivas(req, res){
-		try{
-			const pessoasAtivas = await database.Pessoas.findAll()
-			return res.status(200).json(pessoasAtivas)
-		}catch{
-			return res.status(500).json(error.message)
+	static async pegaPessoasAtivas(req, res) {
+		try {
+			const pessoasAtivas = await database.Pessoas.findAll();
+			return res.status(200).json(pessoasAtivas);
+		} catch {
+			return res.status(500).json(error.message);
 		}
 	}
 
@@ -20,7 +21,7 @@ class PessoasController {
 		}
 	}
 
-	static async pegaUmPessoa(req, res) {
+	static async pegaUmaPessoa(req, res) {
 		const { id } = req.params;
 		try {
 			const umaPessoa = await database.Pessoas.findOne({
@@ -148,6 +149,17 @@ class PessoasController {
 				},
 			});
 			return res.status(200).json({ message: `id ${matriculaId} restaurado` });
+		} catch {
+			return res.status(500).json(error.message);
+		}
+	}
+
+	static async pegaMatricula(req, res) {
+		const { estudanteId } = req.params;
+		try {
+			const pessoa = await  database.Pessoas.findOne({where: {id: Number(estudanteId)}});
+			const matriculas = await pessoas.getAulasMatriculadas()
+			return res.status(200).json({ message: `id ${matriculas} deletado` });
 		} catch {
 			return res.status(500).json(error.message);
 		}

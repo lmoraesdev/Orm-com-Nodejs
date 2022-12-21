@@ -5,7 +5,7 @@ const router = Router();
 router
 	.get("/pessoas", PessoasController.pegaPessoasAtivas)
 	.get("/pessoas/todos", PessoasController.pegaTodasAsPessoas)
-	.get("/pessoas/:id", PessoasController.pegaUmPessoa)
+	.get("/pessoas/:id", PessoasController.pegaUmaPessoa)
 	.post("/pessoas", PessoasController.criaPessoa)
 	.post("/pessoas/:id/restaura", PessoasController.restauraPessoa)
 	.put("/pessoas/:id", PessoasController.atualizaPessoa)
@@ -16,6 +16,7 @@ router
 		"/pessoas/:estudanteId/matricula/:matriculaId",
 		PessoasController.pegaUmaMatricula
 	)
+	.get("/pessoas/:estudanteId/matricula", PessoasController.pegaMatricula)
 	.post("/pessoas/:estudanteId/matricula", PessoasController.criaMatricula)
 	.post(
 		"/pessoas/:estudanteId/matricula/:matriculaId/restaura",
