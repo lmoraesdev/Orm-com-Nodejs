@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const { pegaTodasAsPessoas } = require("../controllers/PessoaController");
 const PessoasController = require("../controllers/PessoaController");
 
 const router = Router();
